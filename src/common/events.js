@@ -1,1 +1,1 @@
-export * from 'helloworld-lib/src/common/events';
+export { EventEmitter } from 'helloworld-lib/src/common/events';

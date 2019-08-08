@@ -2,11 +2,11 @@
  * Debug
  */
 
-.-x-debug {
+.debug {
   background: rgba(0, 0, 0, 0.1) !important;
 }
 
-.-x-debug-border {
+.debug-border {
   border: dashed 1px rgba(0, 0, 0, 0.1) !important;
 }
 
@@ -14,7 +14,7 @@
  * Layout
  */
 
-.-x-fit {
+.fit-container {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -22,15 +22,15 @@
   right: 0;
 }
 
-.-x-relative {
+.relative {
   position: relative;
 }
 
-.-x-fixed {
+.fixed {
   position: fixed;
 }
 
-.-x-content-center {
+.flex-center {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -41,7 +41,7 @@
  * ...
  */
 
-.-x-fixed-container {
+.fixed-container {
   position: fixed;
   top: 0;
   bottom: 0;

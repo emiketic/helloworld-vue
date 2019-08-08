@@ -4,7 +4,7 @@
       <v-container
         fluid
         fill-height
-        class="-x-relative"
+        class="relative"
       >
         <transition name="fade">
           <!-- <router-view/> -->

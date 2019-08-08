@@ -3,7 +3,7 @@ import { EventEmitter } from '../common/events';
 import { API_ENDPOINT } from '../common/config';
 import * as FetchHelper from '../common/fetch.helper';
 
-export const AuthServiceImplementation = class AuthService {
+export const AuthServiceImpl = class AuthService {
   events = new EventEmitter();
 
   username = '';
@@ -98,7 +98,7 @@ export const AuthServiceImplementation = class AuthService {
   }
 };
 
-export const AuthService = new AuthServiceImplementation();
+export const AuthService = new AuthServiceImpl();
 
 if (process.env.NODE_ENV === 'development') {
   global.AuthService = AuthService;

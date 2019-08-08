@@ -1,4 +1,3 @@
-
 stages:
   - prepare
   - lint
@@ -20,15 +19,6 @@ install:
   script:
     - npm install
 
-lint-critical:
-  stage: lint
-  tags:
-    - docker
-  before_script:
-    - npm install
-  script:
-    - npm run lint:critical
-
 lint:
   stage: lint
   tags:
@@ -37,7 +27,6 @@ lint:
     - npm install
   script:
     - npm run lint
-  allow_failure: true
 
 test:
   stage: test
@@ -47,7 +36,6 @@ test:
     - npm install
   script:
     - npm run test
-  allow_failure: true
 
 build:
   stage: build
@@ -63,10 +51,22 @@ build:
 #   stage: deploy
 #   dependencies:
 #     - build
-#   tags:
-#     - deploy:helloworld
 #   only:
 #     - master
+#   tags:
+#     - deploy:helloworld
+#   script:
+#     - ./scripts/deploy.sh ./dist/
+
+# deploy:
+#   stage: deploy
+#   dependencies:
+#     - build
+#   only:
+#     - master
+#   tags:
+#     - docker
+#   image: emiketic/essentials
 #   script:
 #     - ./scripts/deploy.sh ./dist/
 
@@ -74,10 +74,13 @@ deploy:
   stage: deploy
   dependencies:
     - build
-  tags:
-    - docker
-  image: emiketic/essentials
   only:
     - master
+  tags:
+    - docker
+  image: node:10
   script:
-    - ./scripts/deploy.sh ./dist/
+    - npm install -g firebase-tools
+    - firebase --token $FIREBASE_TOKEN use $FIREBASE_PROJECT_ID
+    - firebase --token $FIREBASE_TOKEN target:apply hosting default $FIREBASE_PROJECT_ID-vue
+    - firebase --token $FIREBASE_TOKEN deploy -m "build $CI_COMMIT_REF_NAME / $CI_COMMIT_SHORT_SHA" --non-interactive

@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
-set -eo pipefail
 
-./scripts/generate-app-icon.favicon.sh assets/icon.svg
+docker pull emiketic/image-processing
 
-./scripts/generate-app-icon.pwa.sh assets/icon.svg
-
-./scripts/generate-public-image.sh assets/logo.svg
-
-./scripts/generate-image.sh assets/logo.svg
+docker run --rm -v $PWD:$PWD -u $(id -u):$(id -g) emiketic/image-processing bash -c  "cd $PWD ; ./scripts/generate-assets.impl.sh"

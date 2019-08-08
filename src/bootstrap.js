@@ -3,9 +3,9 @@
  */
 
 import * as FetchHelper from './common/fetch.helper';
-import * as Dialog from './Shared/Dialog';
+import * as Interaction from './Shared/Interaction';
 
-import { AuthService } from './Auth/Auth.service';
+import { AuthService } from './Auth/AuthService';
 
 import store from './store';
 
@@ -25,11 +25,11 @@ export default async function bootstrap() {
   store.dispatch('Shared/ready');
 
   if (AuthService.isAuthenticated()) {
-    store.dispatch('Shared/initialize').catch((error) => Dialog.toast(Dialog.FAILURE, error.message));
+    store.dispatch('Shared/initialize').catch((error) => Interaction.toast(Interaction.FAILURE, error.message));
   }
 
   AuthService.events.on('login', () => {
-    store.dispatch('Shared/initialize').catch((error) => Dialog.toast(Dialog.FAILURE, error.message));
+    store.dispatch('Shared/initialize').catch((error) => Interaction.toast(Interaction.FAILURE, error.message));
   });
 
   AuthService.events.on('logout', () => {

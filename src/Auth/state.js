@@ -1,4 +1,4 @@
-import { AuthService } from './Auth.service';
+import { AuthService } from './AuthService';
 
 import * as Activity from '../Shared/Activity';
 

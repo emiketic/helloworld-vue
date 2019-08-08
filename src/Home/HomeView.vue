@@ -23,7 +23,7 @@
     </v-layout>
 
     <v-layout
-      v-if="!$store.state.Activity.processing && this.$data.tasks && !this.$data.tasks.length"
+      v-if="!$store.state.Activity.processing && this.$data.posts && !this.$data.posts.length"
       justify-center
       align-center
       column
@@ -38,7 +38,7 @@
         i-flat
         color="primary"
         class="mt-2"
-        @click="fetchTaskSet()"
+        @click="fetchPosts()"
       >
         <span class="mr-2">
           Re-load
@@ -47,24 +47,24 @@
       </v-btn>
     </v-layout>
 
-    <div v-if="!$store.state.Activity.processing && this.$data.tasks && this.$data.tasks.length">
+    <div v-if="!$store.state.Activity.processing && this.$data.posts && this.$data.posts.length">
       <v-card
-        v-for="task in tasks"
-        :key="task.id"
+        v-for="post in posts"
+        :key="post.id"
         class="mb-2"
       >
         <v-card-title>
           <v-checkbox
-            v-model="task.done"
-            :label="task.title"
-            :value="task.done"
+            v-model="post.done"
+            :label="post.title"
+            :value="post.done"
             color="primary"
           />
           <v-spacer />
           <v-btn icon>
             <v-icon
               color="error"
-              @click="removeTask(task)"
+              @click="removePost(post)"
             >
               delete
             </v-icon>
@@ -72,7 +72,7 @@
           <v-btn icon>
             <v-icon
               color="primary"
-              @click="editTask(task)"
+              @click="editPost(post)"
             >
               edit
             </v-icon>
@@ -97,35 +97,35 @@
 export default {
   name: 'HomeView',
   data: () => ({
-    tasks: null,
+    posts: null,
   }),
   mounted() {
-    this.fetchTaskSet();
+    this.fetchPosts();
   },
   methods: {
-    fetchTaskSet() {
+    fetchPosts() {
       this.$store
-        .dispatch('Home/task.fetch')
+        .dispatch('Home/post.fetch')
         .then((response) => {
-          this.$data.tasks = response;
-          // this.$data.tasks = [];
+          this.$data.posts = response;
+          // this.$data.posts = [];
         })
         .catch((error) => {
           console.log(error);
         });
     },
 
-    editTask(task) {
+    editPost(post) {
       alert('editing...');
     },
 
-    removeTask(task) {
-      const { tasks } = this.$data;
-      console.log(tasks);
-      tasks.splice(tasks.indexOf(task));
-      this.$store.dispatch('Home/task.remove', task.id).then((response) => {
-        const { tasks } = this.$data;
-        tasks.splice(tasks.indexOf(task));
+    removePost(post) {
+      const { posts } = this.$data;
+      console.log(posts);
+      posts.splice(posts.indexOf(post));
+      this.$store.dispatch('Home/post.remove', post.id).then((response) => {
+        const { posts } = this.$data;
+        posts.splice(posts.indexOf(post));
       });
     },
   },

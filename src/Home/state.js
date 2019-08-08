@@ -1,4 +1,4 @@
-import { AuthService } from '../Auth/Auth.service';
+import { AuthService } from '../Auth/AuthService';
 
 import { API_ENDPOINT } from '../common/config';
 
@@ -14,20 +14,20 @@ const state = {
   namespaced: true,
 
   state: {
-    task: null,
+    post: null,
   },
 
   mutations: {
-    task: (state, value = null) => {
-      state.task = value;
+    post: (state, value = null) => {
+      state.post = value;
     },
   },
 
   actions: {
-    'task.fetch': (context) => {
+    'post.fetch': (context) => {
       Activity.processing(MODULE, 'operation');
 
-      return fetch(`${API_ENDPOINT}/client/task`, {
+      return fetch(`${API_ENDPOINT}/client/post`, {
         headers: {
           Authorization: `Bearer ${AuthService.getAccessToken()}`,
         },
@@ -35,13 +35,13 @@ const state = {
         .then(FetchHelper.ResponseHandler, FetchHelper.ErrorHandler)
         .then(async ({ ...result }) => {
           const { data } = result;
-          context.commit('task', data);
+          context.commit('post', data);
           return data;
         })
         .finally(() => Activity.done(MODULE, 'operation'));
     },
 
-    'task.create': (context, task) => {
+    'post.create': (context, post) => {
       Activity.processing(MODULE, 'operation');
 
       return fetch(`${API_ENDPOINT}/ask/create`, {
@@ -51,43 +51,43 @@ const state = {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          task,
+          post,
         }),
       })
         .then(FetchHelper.ResponseHandler, FetchHelper.ErrorHandler)
-        .then(async ({ ...result }) => result.task)
+        .then(async ({ ...result }) => result.post)
         .finally(() => Activity.done(MODULE, 'operation'));
     },
 
-    'task.edit': (context, task) => {
+    'post.edit': (context, post) => {
       Activity.processing(MODULE, 'operation');
 
-      return fetch(`${API_ENDPOINT}/client/task/${task.id}/edit`, {
+      return fetch(`${API_ENDPOINT}/client/post/${post.id}/edit`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${AuthService.getAccessToken()}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          task,
+          post,
         }),
       })
         .then(FetchHelper.ResponseHandler, FetchHelper.ErrorHandler)
-        .then(async ({ ...result }) => result.task)
+        .then(async ({ ...result }) => result.post)
         .finally(() => Activity.done(MODULE, 'operation'));
     },
 
-    'task.remove': (context, taskId) => {
+    'post.remove': (context, postId) => {
       Activity.processing(MODULE, 'operation');
 
-      return fetch(`${API_ENDPOINT}/client/task/${taskId}/delete`, {
+      return fetch(`${API_ENDPOINT}/client/post/${postId}/delete`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${AuthService.getAccessToken()}`,
         },
       })
         .then(FetchHelper.ResponseHandler, FetchHelper.ErrorHandler)
-        .then(async ({ ...result }) => result.task)
+        .then(async ({ ...result }) => result.post)
         .finally(() => Activity.done(MODULE, 'operation'));
     },
   },

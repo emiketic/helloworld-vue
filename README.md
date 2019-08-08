@@ -11,9 +11,16 @@ A boilerplate and reference implementation for web applications built with Vue.j
   - email: `client@helloworld.emiketic.com`
   - password: `password`
 
+## Technology
+
+- [Vue.js](https://vuejs.org/v2/guide/)
+- [Vuex](https://vuex.vuejs.org/en/)
+- [Vue Router](https://router.vuejs.org/en/)
+- ...
+
 ## Requirements
 
-- Node.js v10
+- [Node.js v10+](https://nodejs.org/)
 
 ## Usage
 
@@ -22,13 +29,7 @@ A boilerplate and reference implementation for web applications built with Vue.j
 npm install
 
 # run app in development on port 8080
-npm run dev
-
-# lint
-npm run lint
-
-# format
-npm run format
+npm run serve
 
 # run all tests
 npm test
@@ -41,6 +42,12 @@ npm run test:e2e
 
 # build for production
 npm run build
+
+# lint code
+npm run lint
+
+# format code
+npm run format
 ```
 
 ## Debugging
@@ -61,12 +68,8 @@ $app.$store.state.myField;
 $app.$store.dispatch('MyModule/myAction' /* args */);
 ```
 
-## Ressources
+## References
 
-- Libraries
-  - [Vue.js](https://vuejs.org/v2/guide/)
-  - [Vue Router](https://router.vuejs.org/en/)
-  - [Vuex](https://vuex.vuejs.org/en/)
 - Tooling
   - [vue-loader](http://vuejs.github.io/vue-loader)
   - [Vue.js Webpack Template](http://vuejs-templates.github.io/webpack/)

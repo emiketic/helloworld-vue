@@ -5,7 +5,7 @@
         :style="`background-color: ${$COLOR.primary};`"
         fluid
         fill-height
-        class="-x-relative"
+        class="relative"
       >
         <v-layout
           column
